@@ -1,17 +1,15 @@
-import asyncio
+# main.py
 import threading
-from frame_capture import capture_frames
-from classification import classify_frames
-from video_stream import video_feed
+import asyncio
+from frame_capture.capture import capture_frames
+from classification.classify import classify_frames
+from websocket.video_stream import start_server
 
-async def main():
+if __name__ == '__main__':
     capture_thread = threading.Thread(target=capture_frames)
     classify_thread = threading.Thread(target=classify_frames)
+
     capture_thread.start()
     classify_thread.start()
 
-    async with websockets.serve(video_feed, "192.168.164.216", 5000):
-        await asyncio.Future()  # Run forever
-
-if __name__ == '__main__':
-    asyncio.run(main())
+    asyncio.run(start_server())
