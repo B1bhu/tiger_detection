@@ -1,0 +1,7 @@
+numpy
+opencv-python
+gpiozero
+tflite-runtime
+twilio
+requests
+cloudinary
